@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OAuthClient</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <p class="notice"><%= notice %></p>
+
+  <div id="user_nav">
+    <% if user_signed_in? %>
+      Signed in as <%= current_user.name %>. Not you?
+      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path %>
+    <% end %>
+  </div>
+
+  <%= yield %>
+
+</body>
+</html>
+
