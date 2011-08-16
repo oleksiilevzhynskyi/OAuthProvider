@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable
+  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable
 
   validates :login, :presence => true
   validates :name, :presence => true
