@@ -1,0 +1,14 @@
+<h1>New applications</h1>
+<% p "7"*80; p @user %>
+<%= form_for [@user, @client_application] do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', user_client_applications_path %>
+

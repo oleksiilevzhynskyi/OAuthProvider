@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110816204004) do
     t.string   "consumer_key"
     t.string   "consumer_secret"
     t.integer  "access_token_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

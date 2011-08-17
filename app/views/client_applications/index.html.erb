@@ -1,0 +1,36 @@
+<h1>Listing my applications</h1>
+
+<% if @client_applications.nil? %>
+    You do not have any applications
+<% else %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>callback_url</th>
+      <th>access_level</th>
+      <th>consumer_key</th>
+      <th>consumer_secret</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @client_applications.each do |client_application| %>
+    <tr>
+      <td><%= client_application.name %></td>
+      <td><%= client_application.callback_url %></td>
+      <td><%= client_application.access_level %></td>
+      <td><%= client_application.consumer_key %></td>
+      <td><%= client_application.consumer_secret %></td>
+      <td><%= link_to 'Show', user_client_application_path(client_application.user_id, client_application) %></td>
+      <td><%= link_to 'Edit', edit_user_client_application_path(client_application, client_application.user_id) %></td>
+      <td><%= link_to 'Destroy', user_client_application_path(client_application.user_id, client_application), confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+<br />
+
+
+<%= link_to 'New App', new_user_client_application_path %>
+
