@@ -23,6 +23,8 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'jquery-rails'
 
+gem 'devise_oauth2_providable'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
