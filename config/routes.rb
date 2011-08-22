@@ -6,6 +6,13 @@ OAuthClient::Application.routes.draw do
     resources :client_applications, :path => "myapp"
   end
 
+  resource :o_auth do
+    collection do
+      get 'request_token'
+      get 'autorize'
+      get 'acess_token'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
