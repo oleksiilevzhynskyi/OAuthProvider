@@ -1,12 +1,11 @@
 OAuthClient::Application.routes.draw do
-
-  root :to => "users#index"
-
+  root :to => "client_applications#index"
 
   devise_for :users
   resources :users do
     resources :client_applications, :path => "myapp"
   end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
