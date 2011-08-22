@@ -1,5 +1,6 @@
 class ClientApplicationsController < ApplicationController
 
+  before_filter :authenticate_user!
   before_filter :find_user
   before_filter :find_client_application
 
@@ -21,19 +22,28 @@ class ClientApplicationsController < ApplicationController
     else
       render :new
     end
+  end
 
+  def destroy
+    @client_application = ClientApplication.find(params[:id])
+    @client_application.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_client_applications_path(@user)}
+    end
   end
 
   private
 
   def find_user
-    @user = User.find_by_id(params[:user_id])
+    @user = current_user
+    p 'R'*80
+    p @user
+    #@user = User.find_by_id(params[:user_id])
   end
 
   def find_client_application
     @client_applications = @user.client_applications
-    p '4'*80
-    p @client_applications
   end
 
 end
