@@ -6,7 +6,7 @@ OAuthClient::Application.routes.draw do
     resources :client_applications, :path => "myapp"
   end
 
-  resource :o_auth do
+  resource :oauth do
     collection do
       get 'request_token'
       get 'autorize'
