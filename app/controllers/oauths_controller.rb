@@ -1,7 +1,5 @@
 class OauthsController < ApplicationController
 
-  #before_filter :authenticate_user!
-
   def request_token
   end
 
@@ -11,7 +9,10 @@ class OauthsController < ApplicationController
     @client = ClientApplication.find_by_consumer_key(client_id)
     hash = Digest::SHA1.hexdigest(@client.consumer_secret)
     if hash == client_secret
-      redirect_to "http://localhost:3000/users/auth/myprovider/callback?token=#{random_sting(:size => 20)}"
+      if authenticate_user!
+        token = Digest::SHA1.hexdigest("#{@client.consumer_secret}, #{current_user.id}, #{current_user.name}")
+        redirect_to "http://localhost:3000/users/auth/myprovider/callback?token=#{token};uid=#{current_user.id};username=#{current_user.name}"
+      end
     end
   end
 
