@@ -10,7 +10,7 @@ OAuthClient::Application.routes.draw do
     collection do
       get 'request_token'
       get 'autorize'
-      get 'acess_token'
+      post 'access_token'
     end
   end
 

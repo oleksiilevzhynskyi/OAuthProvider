@@ -4,20 +4,19 @@ class OauthsController < ApplicationController
   end
 
   def autorize
-    client_id = params["oauth"].slice(0,20)
-    client_secret = params["oauth"].slice(20,60)
-    @client = ClientApplication.find_by_consumer_key(client_id)
-    hash = Digest::SHA1.hexdigest(@client.consumer_secret)
-    if hash == client_secret
+    @client = ClientApplication.find_by_consumer_key(params["client_id"])
+    if @client.presence
       if authenticate_user!
         token = Digest::SHA1.hexdigest("#{@client.consumer_secret}, #{current_user.id}, #{current_user.name}")
-        redirect_to "http://localhost:3000/users/auth/myprovider/callback?token=#{token};uid=#{current_user.id};username=#{current_user.name}"
+        redirect_to params[:redirect_uri] + "?code=#{token}"
       end
     end
   end
 
-  def acess_token
-
+  def access_token
+    @client = ClientApplication.find_by_consumer_key(params["client_id"])
+    token = Digest::SHA1.hexdigest("#{@client.consumer_secret}")
+    redirect_to params[:redirect_uri] + "?token=#{token};token_secret=#{token}"
   end
 
   private
