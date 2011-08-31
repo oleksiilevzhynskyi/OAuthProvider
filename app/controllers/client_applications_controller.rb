@@ -37,9 +37,6 @@ class ClientApplicationsController < ApplicationController
 
   def find_user
     @user = current_user
-    p 'R'*80
-    p @user
-    #@user = User.find_by_id(params[:user_id])
   end
 
   def find_client_application
